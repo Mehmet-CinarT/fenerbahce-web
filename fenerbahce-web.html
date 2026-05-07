@@ -454,7 +454,7 @@
         .donut-wrap { display: flex; justify-content: center; }
         .donut {
             width: 136px; height: 136px; border-radius: 50%;
-            background: conic-gradient(var(--yellow) 0% 58%, rgba(255,255,255,0.08) 58% 100%);
+            background: conic-gradient(var(--yellow) 0% 61%, rgba(255,255,255,0.08) 61% 100%);
             display: flex; align-items: center; justify-content: center; position: relative;
         }
         .donut::before { content: ''; position: absolute; width: 96px; height: 96px; background: #001235; border-radius: 50%; }
@@ -481,6 +481,36 @@
         .sc-goals { text-align: right; }
         .sc-n { display: block; font-size: 26px; font-weight: 900; color: var(--yellow); line-height: 1; }
         .sc-lbl { font-size: 11px; color: var(--gray); }
+
+        /* ── TAB NAV ──────────────────────────────────────── */
+        .tab-nav {
+            position: sticky; top: 70px; z-index: 900;
+            background: rgba(0,10,30,0.97);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,237,0,0.12);
+        }
+        .tab-nav-inner {
+            max-width: 1400px; margin: 0 auto;
+            display: flex; padding: 0 32px;
+            overflow-x: auto; scrollbar-width: none;
+        }
+        .tab-nav-inner::-webkit-scrollbar { display: none; }
+        .tab-btn {
+            flex-shrink: 0;
+            background: none; border: none;
+            border-bottom: 3px solid transparent;
+            color: rgba(255,255,255,0.5);
+            padding: 16px 24px; font-size: 13.5px; font-weight: 600;
+            cursor: pointer; transition: var(--transition);
+            display: flex; align-items: center; gap: 8px;
+            white-space: nowrap;
+        }
+        .tab-btn:hover { color: rgba(255,255,255,0.85); }
+        .tab-btn.active {
+            color: var(--yellow);
+            border-bottom-color: var(--yellow);
+        }
+        .tab-btn i { font-size: 13px; }
 
         /* ── FOOTER ───────────────────────────────────────── */
         footer {
@@ -776,6 +806,19 @@
 </section>
 
 <!-- ══════════════ TAB NAV ══════════════ -->
+<div class="tab-nav" id="tabNav">
+    <div class="tab-nav-inner">
+        <button class="tab-btn active" id="tbtn-kulup" onclick="showTab('kulup')">
+            <i class="fas fa-shield-alt"></i> Kulüp
+        </button>
+        <button class="tab-btn" id="tbtn-futbolcular" onclick="showTab('futbolcular')">
+            <i class="fas fa-users"></i> Futbolcular
+        </button>
+        <button class="tab-btn" id="tbtn-istatistikler" onclick="showTab('istatistikler')">
+            <i class="fas fa-chart-bar"></i> İstatistikler
+        </button>
+    </div>
+</div>
 
 <!-- ══════════════ MAIN ══════════════ -->
 <main class="main">
@@ -943,19 +986,19 @@
         </div>
 
         <div class="season-section">
-            <h3 class="sub-title">2024-2025 Sezonu</h3>
+            <h3 class="sub-title">2025-2026 Sezonu</h3>
             <div class="season-grid">
                 <div class="s-card">
                     <h4><i class="fas fa-chart-pie" style="color:var(--yellow);margin-right:8px"></i>Lig Performansı</h4>
                     <div class="perf-row">
                         <span class="perf-label">Galibiyet</span>
-                        <div class="perf-track"><div class="perf-bar" style="width:72%;background:var(--yellow)"></div></div>
-                        <span class="perf-pct">72%</span>
+                        <div class="perf-track"><div class="perf-bar" style="width:76%;background:var(--yellow)"></div></div>
+                        <span class="perf-pct">76%</span>
                     </div>
                     <div class="perf-row">
                         <span class="perf-label">Beraberlik</span>
-                        <div class="perf-track"><div class="perf-bar" style="width:18%;background:#7f8c8d"></div></div>
-                        <span class="perf-pct">18%</span>
+                        <div class="perf-track"><div class="perf-bar" style="width:14%;background:#7f8c8d"></div></div>
+                        <span class="perf-pct">14%</span>
                     </div>
                     <div class="perf-row">
                         <span class="perf-label">Mağlubiyet</span>
@@ -967,11 +1010,11 @@
                 <div class="s-card">
                     <h4><i class="fas fa-futbol" style="color:var(--yellow);margin-right:8px"></i>Gol İstatistikleri</h4>
                     <div class="goal-pair">
-                        <div class="goal-box"><div class="goal-n">67</div><div class="goal-l">Atılan Gol</div></div>
+                        <div class="goal-box"><div class="goal-n">74</div><div class="goal-l">Atılan Gol</div></div>
                         <div class="goal-sep"></div>
-                        <div class="goal-box"><div class="goal-n">28</div><div class="goal-l">Yenilen Gol</div></div>
+                        <div class="goal-box"><div class="goal-n">24</div><div class="goal-l">Yenilen Gol</div></div>
                     </div>
-                    <div class="goal-diff-text">Gol Farkı: +39 ✓</div>
+                    <div class="goal-diff-text">Gol Farkı: +50 ✓</div>
                 </div>
 
                 <div class="s-card">
@@ -979,7 +1022,7 @@
                     <div class="donut-wrap">
                         <div class="donut">
                             <div class="donut-inner">
-                                <span class="donut-pct">58%</span>
+                                <span class="donut-pct">61%</span>
                                 <span class="donut-txt">Hakimiyet</span>
                             </div>
                         </div>
@@ -1571,19 +1614,21 @@ let statsAnimated = false;
 function showTab(id) {
     TABS.forEach(t => {
         const s = document.getElementById('sec-' + t);
-        if (!s) return;
-        s.classList.remove('visible');
-        s.style.display = 'none';
+        if (s) { s.classList.remove('visible'); s.style.display = 'none'; }
+        const btn = document.getElementById('tbtn-' + t);
+        if (btn) btn.classList.remove('active');
+        const nl = document.querySelector(`.nav-link[onclick*="'${t}'"]`);
+        if (nl) nl.classList.remove('active-nav');
     });
     const sec = document.getElementById('sec-' + id);
-    if (!sec) return;
-    sec.style.display = 'block';
-    void sec.offsetWidth;
-    sec.classList.add('visible');
-    document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active-nav'));
-    const activeLink = document.querySelector(`.nav-link[onclick*="'${id}'"]`);
-    if (activeLink) activeLink.classList.add('active-nav');
-    window.scrollTo({ top: (document.querySelector('.main').offsetTop - 80), behavior: 'smooth' });
+    if (sec) { sec.style.display = 'block'; void sec.offsetWidth; sec.classList.add('visible'); }
+    const btn = document.getElementById('tbtn-' + id);
+    if (btn) btn.classList.add('active');
+    const nl = document.querySelector(`.nav-link[onclick*="'${id}'"]`);
+    if (nl) nl.classList.add('active-nav');
+    const tabNav = document.getElementById('tabNav');
+    const mainTop = tabNav ? tabNav.offsetTop : (document.querySelector('.main').offsetTop - 80);
+    window.scrollTo({ top: mainTop - 70, behavior: 'smooth' });
     if (id === 'istatistikler' && !statsAnimated) { animateNums(); statsAnimated = true; }
 }
 
