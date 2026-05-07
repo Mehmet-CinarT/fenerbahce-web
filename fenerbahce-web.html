@@ -989,20 +989,20 @@
             <h3 class="sub-title">2025-2026 Sezonu</h3>
             <div class="season-grid">
                 <div class="s-card">
-                    <h4><i class="fas fa-chart-pie" style="color:var(--yellow);margin-right:8px"></i>Lig Performansı <span style="font-size:12px;color:var(--gray);font-weight:500">(22 Maç)</span></h4>
+                    <h4><i class="fas fa-chart-pie" style="color:var(--yellow);margin-right:8px"></i>Lig Performansı <span style="font-size:12px;color:var(--gray);font-weight:500">(32 Maç)</span></h4>
                     <div class="perf-row">
                         <span class="perf-label">Galibiyet</span>
-                        <div class="perf-track"><div class="perf-bar" style="width:45%;background:var(--yellow)"></div></div>
-                        <span class="perf-pct" style="color:#2ecc71">10</span>
+                        <div class="perf-track"><div class="perf-bar" style="width:62%;background:var(--yellow)"></div></div>
+                        <span class="perf-pct" style="color:#2ecc71">20</span>
                     </div>
                     <div class="perf-row">
                         <span class="perf-label">Beraberlik</span>
-                        <div class="perf-track"><div class="perf-bar" style="width:45%;background:#7f8c8d"></div></div>
+                        <div class="perf-track"><div class="perf-bar" style="width:31%;background:#7f8c8d"></div></div>
                         <span class="perf-pct" style="color:#f39c12">10</span>
                     </div>
                     <div class="perf-row">
                         <span class="perf-label">Mağlubiyet</span>
-                        <div class="perf-track"><div class="perf-bar" style="width:9%;background:#e74c3c"></div></div>
+                        <div class="perf-track"><div class="perf-bar" style="width:6%;background:#e74c3c"></div></div>
                         <span class="perf-pct" style="color:#e74c3c">2</span>
                     </div>
                 </div>
@@ -1498,38 +1498,39 @@ window.doChangeName = async () => {
 <script>
 /* ── Players data ─────────────────────────────────────────────────────── */
 const SQUAD = [
-    // KALECILER
-    { no:31, name:'Ederson',            posDetail:'Kaleci',           pos:'GK',  nat:'🇧🇷', country:'Brezilya',   dob:'17.08.1993', age:31, height:'195 cm', foot:'Sol',  contract:'30.06.2027', prevClub:'Manchester City',    value:'15 mil €',   tmId:'95609'  },
-    { no:1,  name:'Tarık Çetin',        posDetail:'Kaleci',           pos:'GK',  nat:'🇹🇷', country:'Türkiye',    dob:'05.01.1997', age:28, height:'195 cm', foot:'Sağ',  contract:'30.06.2026', prevClub:'Fenerbahçe',         value:'600 bin €',  tmId:'548095' },
-    { no:54, name:'Mert Günok',         posDetail:'Kaleci',           pos:'GK',  nat:'🇹🇷', country:'Türkiye',    dob:'01.03.1990', age:34, height:'193 cm', foot:'Sağ',  contract:'30.06.2026', prevClub:'Trabzonspor',        value:'500 bin €',  tmId:'83901'  },
-    { no:24, name:'Ergin Can Biberçe',  posDetail:'Kaleci',           pos:'GK',  nat:'🇹🇷', country:'Türkiye',    dob:'01.03.2000', age:25, height:'190 cm', foot:'Sol',  contract:'30.06.2026', prevClub:'Fenerbahçe Alt Yapı',value:'-',          tmId:'1066975'},
+    // KALECİLER
+    { no:31, name:'Ederson',            posDetail:'Kaleci',           pos:'GK',  nat:'🇧🇷', country:'Brezilya',        dob:'17.08.1993', age:32, height:'195 cm', foot:'Sol',  contract:'30.06.2027', prevClub:'Manchester City',    value:'15 mil €',   tmId:'95609'  },
+    { no:1,  name:'Tarık Çetin',        posDetail:'Kaleci',           pos:'GK',  nat:'🇹🇷', country:'Türkiye',         dob:'05.01.1997', age:28, height:'195 cm', foot:'Sağ',  contract:'30.06.2026', prevClub:'Fenerbahçe',         value:'600 bin €',  tmId:'548095' },
+    { no:54, name:'Mert Günok',         posDetail:'Kaleci',           pos:'GK',  nat:'🇹🇷', country:'Türkiye',         dob:'01.03.1990', age:35, height:'193 cm', foot:'Sağ',  contract:'30.06.2026', prevClub:'Trabzonspor',        value:'500 bin €',  tmId:'83901'  },
+    { no:24, name:'Ergin Can Biberçe',  posDetail:'Kaleci',           pos:'GK',  nat:'🇹🇷', country:'Türkiye',         dob:'22.01.2007', age:19, height:'190 cm', foot:'Sol',  contract:'30.06.2026', prevClub:'Fenerbahçe Alt Yapı',value:'200 bin €',  tmId:'1066975'},
     // DEFANS
-    { no:3,  name:'Jayden Oosterwolde', posDetail:'Sol Bek',          pos:'DEF', nat:'🇳🇱', country:'Hollanda',   dob:'26.05.2001', age:23, height:'185 cm', foot:'Sol',  contract:'30.06.2028', prevClub:'Parma',              value:'15 mil €',   tmId:'536455' },
-    { no:6,  name:'Milan Škriniar',     posDetail:'Stoper',           pos:'DEF', nat:'🇸🇰', country:'Slovakya',   dob:'11.02.1995', age:29, height:'187 cm', foot:'Sağ',  contract:'30.06.2028', prevClub:'Paris Saint-Germain', value:'15 mil €',   tmId:'261671' },
-    { no:37, name:'Yiğit Efe Demir',    posDetail:'Stoper',           pos:'DEF', nat:'🇹🇷', country:'Türkiye',    dob:'02.08.2004', age:20, height:'186 cm', foot:'Sağ',  contract:'30.06.2027', prevClub:'Fenerbahçe Alt Yapı',value:'3 mil €',    tmId:'1050010'},
-    { no:4,  name:'Çağlar Söyüncü',     posDetail:'Stoper',           pos:'DEF', nat:'🇹🇷', country:'Türkiye',    dob:'23.05.1996', age:28, height:'186 cm', foot:'Çift', contract:'30.06.2026', prevClub:'Atletico Madrid',    value:'4.50 mil €', tmId:'309914' },
-    { no:67, name:'Kamil Efta Degen',   posDetail:'Stoper',           pos:'DEF', nat:'🇵🇱', country:'Polonya',    dob:'09.11.2003', age:21, height:'180 cm', foot:'Sol',  contract:'30.06.2026', prevClub:'-',                  value:'100 bin €',  tmId:'1050011'},
-    { no:92, name:'Archie Brown',       posDetail:'Sol Bek',          pos:'DEF', nat:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', country:'İngiltere',  dob:'25.05.2003', age:21, height:'175 cm', foot:'Sol',  contract:'15.07.2026', prevClub:'Brentford',          value:'9 mil €',    tmId:'1050012'},
-    { no:32, name:'Gerbert Mercan',     posDetail:'Sol Bek',          pos:'DEF', nat:'🇩🇪', country:'Almanya',    dob:'10.12.2002', age:22, height:'175 cm', foot:'Sol',  contract:'30.06.2026', prevClub:'-',                  value:'5 mil €',    tmId:'1050013'},
-    { no:25, name:'Mert Müldür',        posDetail:'Sağ Bek',          pos:'DEF', nat:'🇹🇷', country:'Türkiye',    dob:'05.11.1999', age:25, height:'183 cm', foot:'Sağ',  contract:'02.08.2027', prevClub:'Hellas Verona',      value:'7 mil €',    tmId:'392588' },
-    { no:27, name:'William Samedo',     posDetail:'Sağ Bek',          pos:'DEF', nat:'🇵🇹', country:'Portekiz',   dob:'15.11.1993', age:31, height:'177 cm', foot:'Sağ',  contract:'30.06.2027', prevClub:'Sporting CP',        value:'7 mil €',    tmId:'1050014'},
+    { no:3,  name:'Jayden Oosterwolde', posDetail:'Sol Bek',          pos:'DEF', nat:'🇳🇱', country:'Hollanda',        dob:'26.05.2001', age:23, height:'185 cm', foot:'Sol',  contract:'30.06.2028', prevClub:'Parma',              value:'15 mil €',   tmId:'536455' },
+    { no:6,  name:'Milan Škriniar',     posDetail:'Stoper',           pos:'DEF', nat:'🇸🇰', country:'Slovakya',        dob:'11.02.1995', age:31, height:'187 cm', foot:'Sağ',  contract:'30.06.2028', prevClub:'Paris Saint-Germain', value:'11 mil €',   tmId:'261671' },
+    { no:14, name:'Yiğit Efe Demir',    posDetail:'Stoper',           pos:'DEF', nat:'🇹🇷', country:'Türkiye',         dob:'02.08.2004', age:21, height:'186 cm', foot:'Sağ',  contract:'30.06.2027', prevClub:'Fenerbahçe Alt Yapı',value:'3 mil €',    tmId:'1050010'},
+    { no:4,  name:'Çağlar Söyüncü',     posDetail:'Stoper',           pos:'DEF', nat:'🇹🇷', country:'Türkiye',         dob:'23.05.1996', age:29, height:'186 cm', foot:'Çift', contract:'30.06.2027', prevClub:'Atletico Madrid',    value:'4.50 mil €', tmId:'309914' },
+    { no:67, name:'Kamil Efta Degen',   posDetail:'Stoper',           pos:'DEF', nat:'🇵🇱', country:'Polonya',         dob:'09.11.2003', age:22, height:'180 cm', foot:'Sol',  contract:'30.06.2026', prevClub:'-',                  value:'100 bin €',  tmId:'1050011'},
+    { no:92, name:'Archie Brown',       posDetail:'Sol Bek',          pos:'DEF', nat:'🏴󠁧󠁢󠁥󠁮󠁧󠁿', country:'İngiltere',       dob:'28.05.2003', age:22, height:'175 cm', foot:'Sol',  contract:'30.06.2027', prevClub:'Brentford',          value:'9 mil €',    tmId:'1050012'},
+    { no:32, name:'Gerbert Mercan',     posDetail:'Sol Bek',          pos:'DEF', nat:'🇩🇪', country:'Almanya',         dob:'10.12.2002', age:22, height:'175 cm', foot:'Sol',  contract:'30.06.2026', prevClub:'-',                  value:'5 mil €',    tmId:'1050013'},
+    { no:25, name:'Mert Müldür',        posDetail:'Sağ Bek',          pos:'DEF', nat:'🇹🇷', country:'Türkiye',         dob:'05.11.1999', age:27, height:'183 cm', foot:'Sağ',  contract:'30.06.2027', prevClub:'Hellas Verona',      value:'7 mil €',    tmId:'392588' },
+    { no:27, name:'Nilüsson Samedo',    posDetail:'Sağ Bek',          pos:'DEF', nat:'🇵🇹', country:'Portekiz',        dob:'16.11.1993', age:32, height:'177 cm', foot:'Sağ',  contract:'30.06.2027', prevClub:'Sporting CP',        value:'7 mil €',    tmId:'1050014'},
     // ORTA SAHA
-    { no:61, name:'Edson Álvarez',      posDetail:'Orta Saha (Def.)', pos:'MID', nat:'🇲🇽', country:'Meksika',    dob:'24.10.1997', age:27, height:'190 cm', foot:'Sağ',  contract:'19.08.2028', prevClub:'West Ham United',    value:'15 mil €',   tmId:'364521' },
-    { no:8,  name:'İsmail Yüksek',      posDetail:'Orta Saha (Def.)', pos:'MID', nat:'🇹🇷', country:'Türkiye',    dob:'25.01.1997', age:27, height:'182 cm', foot:'Sağ',  contract:'19.08.2027', prevClub:'Fenerbahçe',         value:'15 mil €',   tmId:'463834' },
-    { no:16, name:"N'Golo Kanté",       posDetail:'Orta Saha (Def.)', pos:'MID', nat:'🇫🇷', country:'Fransa',     dob:'29.03.1991', age:33, height:'169 cm', foot:'Sağ',  contract:'05.02.2028', prevClub:'Al-Ittihad',         value:'4.50 mil €', tmId:'165240' },
-    { no:7,  name:'Mattéo Guendouzi',   posDetail:'Merkez Orta Saha', pos:'MID', nat:'🇫🇷', country:'Fransa',     dob:'14.04.1999', age:25, height:'187 cm', foot:'Çift', contract:'03.06.2028', prevClub:'Lazio',              value:'25 mil €',   tmId:'353616' },
-    { no:18, name:'Fred',               posDetail:'Merkez Orta Saha', pos:'MID', nat:'🇧🇷', country:'Brezilya',   dob:'05.03.1993', age:31, height:'169 cm', foot:'Çift', contract:'15.08.2027', prevClub:'Manchester United',  value:'6 mil €',    tmId:'248721' },
-    { no:40, name:'Abdou Aziz Fall',    posDetail:'Merkez Orta Saha', pos:'MID', nat:'🇸🇳', country:'Senegal',    dob:'20.07.2007', age:17, height:'175 cm', foot:'Sol',  contract:'30.06.2026', prevClub:'-',                  value:'100 bin €',  tmId:'1050015'},
-    { no:10, name:'Marco Asensio',      posDetail:'On Numara',        pos:'MID', nat:'🇪🇸', country:'İspanya',    dob:'21.01.1996', age:28, height:'182 cm', foot:'Sol',  contract:'30.06.2027', prevClub:'Paris Saint-Germain', value:'15 mil €',   tmId:'255907' },
-    { no:88, name:'Talisca',            posDetail:'On Numara',        pos:'MID', nat:'🇧🇷', country:'Brezilya',   dob:'01.09.1994', age:30, height:'188 cm', foot:'Sol',  contract:'30.06.2026', prevClub:'Al-Nassr',           value:'8 mil €',    tmId:'64755'  },
+    { no:61, name:'Edson Álvarez',      posDetail:'Orta Saha (Def.)', pos:'MID', nat:'🇲🇽', country:'Meksika',         dob:'24.10.1997', age:27, height:'190 cm', foot:'Sağ',  contract:'19.08.2028', prevClub:'West Ham United',    value:'15 mil €',   tmId:'364521' },
+    { no:8,  name:'İsmail Yüksek',      posDetail:'Orta Saha (Def.)', pos:'MID', nat:'🇹🇷', country:'Türkiye',         dob:'25.01.1997', age:27, height:'182 cm', foot:'Sağ',  contract:'19.08.2027', prevClub:'Fenerbahçe',         value:'13 mil €',   tmId:'463834' },
+    { no:16, name:"N'Golo Kanté",       posDetail:'Orta Saha (Def.)', pos:'MID', nat:'🇫🇷', country:'Fransa',          dob:'29.03.1991', age:34, height:'169 cm', foot:'Sağ',  contract:'05.02.2028', prevClub:'Al-Ittihad',         value:'4.50 mil €', tmId:'165240' },
+    { no:7,  name:'Mattéo Guendouzi',   posDetail:'Merkez Orta Saha', pos:'MID', nat:'🇫🇷', country:'Fransa',          dob:'14.04.1999', age:26, height:'187 cm', foot:'Çift', contract:'03.06.2028', prevClub:'Lazio',              value:'28 mil €',   tmId:'353616' },
+    { no:18, name:'Fred',               posDetail:'Merkez Orta Saha', pos:'MID', nat:'🇧🇷', country:'Brezilya',        dob:'05.03.1993', age:32, height:'169 cm', foot:'Çift', contract:'15.08.2027', prevClub:'Manchester United',  value:'6 mil €',    tmId:'248721' },
+    { no:40, name:'Abdou Aziz Fall',    posDetail:'Merkez Orta Saha', pos:'MID', nat:'🇸🇳', country:'Senegal',         dob:'20.02.2007', age:19, height:'175 cm', foot:'Sol',  contract:'30.06.2026', prevClub:'-',                  value:'100 bin €',  tmId:'1050015'},
+    { no:10, name:'Marco Asensio',      posDetail:'On Numara',        pos:'MID', nat:'🇪🇸', country:'İspanya',         dob:'21.01.1996', age:30, height:'182 cm', foot:'Sol',  contract:'30.06.2027', prevClub:'Paris Saint-Germain', value:'15 mil €',   tmId:'255907' },
+    { no:88, name:'Talisca',            posDetail:'On Numara',        pos:'MID', nat:'🇧🇷', country:'Brezilya',        dob:'01.02.1994', age:31, height:'188 cm', foot:'Sol',  contract:'30.06.2026', prevClub:'Al-Nassr',           value:'8 mil €',    tmId:'64755'  },
+    { no:5,  name:'Mert Hakan Yandaş',  posDetail:'On Numara',        pos:'MID', nat:'🇹🇷', country:'Türkiye',         dob:'12.08.1994', age:31, height:'180 cm', foot:'Sağ',  contract:'30.06.2026', prevClub:'Trabzonspor',        value:'3 mil €',    tmId:'232474' },
     // FORVET
-    { no:79, name:'Kerem Aktürkoğlu',   posDetail:'Sol Kanat',        pos:'FWD', nat:'🇹🇷', country:'Türkiye',    dob:'21.10.1998', age:26, height:'175 cm', foot:'Sol',  contract:'30.06.2030', prevClub:'Galatasaray',        value:'22 mil €',   tmId:'590000' },
-    { no:77, name:'Oğuz Aydın',         posDetail:'Sol Kanat',        pos:'FWD', nat:'🇹🇷', country:'Türkiye',    dob:'27.10.2001', age:23, height:'175 cm', foot:'Sol',  contract:'15.08.2027', prevClub:'Fenerbahçe',         value:'8 mil €',    tmId:'1050016'},
-    { no:45, name:'Samuel Chukwueze',   posDetail:'Sağ Kanat',        pos:'FWD', nat:'🇳🇬', country:'Nijerya',    dob:'22.04.2002', age:23, height:'174 cm', foot:'Sol',  contract:'15.08.2026', prevClub:'AC Milan',           value:'18 mil €',   tmId:'450523' },
-    { no:70, name:'Anthony Musaba',     posDetail:'Sol Kanat',        pos:'FWD', nat:'🇳🇴', country:'Norveç',     dob:'05.07.2000', age:24, height:'180 cm', foot:'Sol',  contract:'30.06.2026', prevClub:'Stade Reims',        value:'-',          tmId:'1050017'},
-    { no:9,  name:'Jhon Durán',         posDetail:'Santrafor',        pos:'FWD', nat:'🇨🇴', country:'Kolombiya',  dob:'13.12.2003', age:21, height:'186 cm', foot:'Sağ',  contract:'30.06.2030', prevClub:'Aston Villa',        value:'65 mil €',   tmId:'748600' },
-    { no:28, name:'Emma Marín',         posDetail:'Santrafor',        pos:'FWD', nat:'🇸🇪', country:'İsveç',      dob:'24.11.1997', age:27, height:'184 cm', foot:'Sol',  contract:'30.06.2026', prevClub:'-',                  value:'600 bin €',  tmId:'1050018'},
-    { no:82, name:'Sidiki Chérif',      posDetail:'Santrafor',        pos:'FWD', nat:'🇬🇳', country:'Gine',       dob:'15.01.2008', age:17, height:'170 cm', foot:'Sol',  contract:'30.06.2027', prevClub:'-',                  value:'15 mil €',   tmId:'1050019'},
+    { no:79, name:'Kerem Aktürkoğlu',   posDetail:'Sol Kanat',        pos:'FWD', nat:'🇹🇷', country:'Türkiye',         dob:'21.10.1998', age:27, height:'175 cm', foot:'Sol',  contract:'30.06.2030', prevClub:'Galatasaray',        value:'22 mil €',   tmId:'590000' },
+    { no:77, name:'Oğuz Aydın',         posDetail:'Sol Kanat',        pos:'FWD', nat:'🇹🇷', country:'Türkiye',         dob:'27.10.2000', age:25, height:'175 cm', foot:'Sol',  contract:'15.08.2027', prevClub:'Fenerbahçe',         value:'8 mil €',    tmId:'1050016'},
+    { no:43, name:'Dorgeles Nene',      posDetail:'Sağ Kanat',        pos:'FWD', nat:'🇨🇮', country:'Fildişi Sahili',  dob:'25.12.2002', age:22, height:'176 cm', foot:'Sol',  contract:'30.06.2027', prevClub:'RC Lens',            value:'15 mil €',   tmId:'589609' },
+    { no:70, name:'Anthony Musaba',     posDetail:'Sağ Kanat',        pos:'FWD', nat:'🇳🇴', country:'Norveç',          dob:'06.12.2000', age:24, height:'180 cm', foot:'Sol',  contract:'30.06.2026', prevClub:'Stade Reims',        value:'5 mil €',    tmId:'1050017'},
+    { no:9,  name:'Jhon Durán',         posDetail:'Santrafor',        pos:'FWD', nat:'🇨🇴', country:'Kolombiya',       dob:'13.12.2003', age:21, height:'186 cm', foot:'Sağ',  contract:'30.06.2030', prevClub:'Aston Villa',        value:'65 mil €',   tmId:'748600' },
+    { no:28, name:'Emma Marín',         posDetail:'Sağ Kanat',        pos:'FWD', nat:'🇸🇪', country:'İsveç',           dob:'24.01.1997', age:28, height:'184 cm', foot:'Sağ',  contract:'30.06.2026', prevClub:'-',                  value:'600 bin €',  tmId:'1050018'},
+    { no:82, name:'Sidiki Chérif',      posDetail:'Santrafor',        pos:'FWD', nat:'🇬🇳', country:'Gine',            dob:'15.01.2008', age:18, height:'170 cm', foot:'Sol',  contract:'30.06.2027', prevClub:'-',                  value:'15 mil €',   tmId:'1050019'},
 ];
 
 const POS_LABEL = { GK:'Kaleci', DEF:'Defans', MID:'Orta Saha', FWD:'Forvet' };
