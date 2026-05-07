@@ -71,6 +71,7 @@
             font-size: 13.5px; font-weight: 500; transition: var(--transition);
         }
         .nav-link:hover { color: var(--yellow); background: rgba(255,237,0,0.08); }
+        .nav-link.active-nav { color: var(--yellow); background: rgba(255,237,0,0.1); font-weight: 700; }
 
         .auth-area { display: flex; align-items: center; gap: 10px; }
         .user-info { display: flex; align-items: center; gap: 10px; }
@@ -709,7 +710,7 @@
 <!-- ══════════════ HEADER ══════════════ -->
 <header class="header" id="siteHeader">
     <div class="header-inner">
-        <a class="logo" href="#" onclick="showTab('kulup',0)">
+        <a class="logo" href="javascript:void(0)" onclick="showTab('kulup')">
             <img class="logo-circle"
                  src="Fenerbah%C3%A7e.png"
                  alt="Fenerbahçe Logo">
@@ -720,9 +721,9 @@
         </a>
 
         <nav class="top-nav">
-            <a class="nav-link" href="#" onclick="showTab('kulup',0)">Kulüp</a>
-            <a class="nav-link" href="#" onclick="showTab('futbolcular',1)">Futbolcular</a>
-            <a class="nav-link" href="#" onclick="showTab('istatistikler',2)">İstatistikler</a>
+            <a class="nav-link" href="javascript:void(0)" onclick="showTab('kulup')">Kulüp</a>
+            <a class="nav-link" href="javascript:void(0)" onclick="showTab('futbolcular')">Futbolcular</a>
+            <a class="nav-link" href="javascript:void(0)" onclick="showTab('istatistikler')">İstatistikler</a>
         </nav>
 
         <div class="auth-area">
@@ -1153,9 +1154,9 @@
         </div>
         <div class="f-col">
             <h4>Sayfalar</h4>
-            <a href="#" onclick="showTab('kulup',0)">Kulüp</a>
-            <a href="#" onclick="showTab('futbolcular',1)">Futbolcular</a>
-            <a href="#" onclick="showTab('istatistikler',2)">İstatistikler</a>
+            <a href="javascript:void(0)" onclick="showTab('kulup')">Kulüp</a>
+            <a href="javascript:void(0)" onclick="showTab('futbolcular')">Futbolcular</a>
+            <a href="javascript:void(0)" onclick="showTab('istatistikler')">İstatistikler</a>
         </div>
         <div class="f-col">
             <h4>Sosyal Medya</h4>
@@ -1567,18 +1568,22 @@ function filterBy(pos, btn) {
 const TABS = ['kulup', 'futbolcular', 'istatistikler'];
 let statsAnimated = false;
 
-function showTab(id, idx) {
+function showTab(id) {
     TABS.forEach(t => {
         const s = document.getElementById('sec-' + t);
+        if (!s) return;
         s.classList.remove('visible');
-        s.classList.add(t === id ? '' : '');
         s.style.display = 'none';
     });
     const sec = document.getElementById('sec-' + id);
+    if (!sec) return;
     sec.style.display = 'block';
     void sec.offsetWidth;
     sec.classList.add('visible');
-    window.scrollTo({ top: document.querySelector('.main').offsetTop - 70, behavior: 'smooth' });
+    document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active-nav'));
+    const activeLink = document.querySelector(`.nav-link[onclick*="'${id}'"]`);
+    if (activeLink) activeLink.classList.add('active-nav');
+    window.scrollTo({ top: (document.querySelector('.main').offsetTop - 80), behavior: 'smooth' });
     if (id === 'istatistikler' && !statsAnimated) { animateNums(); statsAnimated = true; }
 }
 
