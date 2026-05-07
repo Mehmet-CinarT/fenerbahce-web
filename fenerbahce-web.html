@@ -320,33 +320,99 @@
         .f-btn:hover { border-color: var(--yellow); color: var(--yellow); }
         .f-btn.active { background: var(--yellow); border-color: var(--yellow); color: var(--navy-dark); }
         /* ── PLAYER CARDS ─────────────────────────────────── */
-        .players-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px,1fr)); gap: 18px; }
+        .players-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px,1fr)); gap: 14px; }
         .player-card {
-            background: #081d4a;
-            border: 1px solid rgba(255,237,0,0.1);
-            border-radius: 14px; overflow: hidden;
-            transition: var(--transition); cursor: default; text-align: center;
+            background: #0d1b35;
+            border-radius: 12px; overflow: hidden;
+            transition: var(--transition); cursor: pointer; text-align: center;
+            border: 1px solid transparent;
         }
-        .player-card:hover { transform: translateY(-6px); border-color: rgba(255,237,0,0.5); box-shadow: 0 16px 40px rgba(0,0,0,0.55); }
+        .player-card:hover { transform: translateY(-4px); border-color: rgba(255,237,0,0.4); box-shadow: 0 12px 32px rgba(0,0,0,0.6); }
         .pc-photo-wrap {
-            width: 100%; aspect-ratio: 3/4; overflow: hidden;
-            background: linear-gradient(160deg, #001845 0%, #003080 100%);
+            width: 100%; aspect-ratio: 1/1; overflow: hidden;
+            background: linear-gradient(160deg, #0a1f45 0%, #0d2a60 100%);
             position: relative;
         }
         .pc-photo { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
         .pc-num-badge {
-            position: absolute; top: 8px; left: 8px;
+            position: absolute; top: 7px; left: 7px;
             background: rgba(255,237,0,0.92); color: #001235;
-            font-size: 10px; font-weight: 800; padding: 3px 7px; border-radius: 6px;
+            font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 5px;
         }
         .pc-nat-badge {
-            position: absolute; top: 8px; right: 8px;
-            font-size: 20px; line-height: 1;
+            position: absolute; top: 7px; right: 7px;
+            font-size: 18px; line-height: 1;
             filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
         }
-        .pc-body { padding: 11px 10px 14px; }
-        .pc-name { font-size: 13.5px; font-weight: 700; color: #fff; margin-bottom: 8px; line-height: 1.35; }
-        .pos-tag { padding: 4px 13px; border-radius: 12px; font-size: 11px; font-weight: 700; color: #fff; display: inline-block; }
+        .pc-body { padding: 10px 8px 12px; }
+        .pc-name { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 4px; line-height: 1.3;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .pc-pos { font-size: 11.5px; color: var(--gray); }
+
+        /* ── PLAYER DETAIL MODAL ──────────────────────────── */
+        .player-overlay {
+            position: fixed; inset: 0; z-index: 3000;
+            background: rgba(0,0,0,0.82); backdrop-filter: blur(12px);
+            display: none; align-items: center; justify-content: center; padding: 20px;
+        }
+        .player-overlay.open { display: flex; }
+        .player-modal {
+            background: linear-gradient(145deg, #001540 0%, #002060 100%);
+            border: 1px solid rgba(255,237,0,0.18); border-radius: 22px;
+            width: 100%; max-width: 780px; max-height: 90vh; overflow-y: auto;
+            position: relative; animation: mIn 0.28s ease;
+            box-shadow: 0 32px 80px rgba(0,0,0,0.7);
+        }
+        .pm-close {
+            position: absolute; top: 16px; right: 16px; z-index: 10;
+            background: rgba(255,255,255,0.08); border: none;
+            width: 34px; height: 34px; border-radius: 50%;
+            color: rgba(255,255,255,0.6); cursor: pointer; font-size: 14px;
+            transition: var(--transition);
+        }
+        .pm-close:hover { background: rgba(255,255,255,0.15); color: #fff; }
+        .pm-inner { display: grid; grid-template-columns: 280px 1fr; }
+        .pm-photo-col {
+            background: linear-gradient(160deg, #001030 0%, #002060 100%);
+            border-radius: 22px 0 0 22px; overflow: hidden;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 32px 24px; gap: 16px;
+        }
+        .pm-photo {
+            width: 200px; height: 200px; object-fit: cover; object-position: top;
+            border-radius: 16px; border: 2px solid rgba(255,237,0,0.25);
+            display: block;
+        }
+        .pm-no { font-size: 48px; font-weight: 900; color: rgba(255,237,0,0.15); line-height: 1; }
+        .pm-pos-badge {
+            padding: 6px 18px; border-radius: 20px; font-size: 12px; font-weight: 800;
+            color: #fff; text-align: center;
+        }
+        .pm-nat-row { display: flex; align-items: center; gap: 8px; font-size: 14px; color: rgba(255,255,255,0.7); }
+        .pm-nat-flag { font-size: 24px; }
+        .pm-info-col { padding: 32px 28px; }
+        .pm-name { font-size: 26px; font-weight: 900; margin-bottom: 4px; line-height: 1.2; }
+        .pm-posdetail { color: var(--gray); font-size: 14px; margin-bottom: 24px; }
+        .pm-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .pm-stat {
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 10px; padding: 14px 16px;
+        }
+        .pm-stat-label { font-size: 10px; color: var(--gray); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 5px; }
+        .pm-stat-val { font-size: 15px; font-weight: 700; }
+        .pm-stat-val.yellow { color: var(--yellow); }
+        .pm-tm-btn {
+            display: flex; align-items: center; gap: 8px; margin-top: 20px;
+            background: rgba(255,237,0,0.1); border: 1px solid rgba(255,237,0,0.25);
+            color: var(--yellow); padding: 11px 20px; border-radius: 10px;
+            font-size: 13px; font-weight: 600; text-decoration: none;
+            transition: var(--transition); width: fit-content;
+        }
+        .pm-tm-btn:hover { background: rgba(255,237,0,0.18); }
+        @media(max-width:600px) {
+            .pm-inner { grid-template-columns: 1fr; }
+            .pm-photo-col { border-radius: 22px 22px 0 0; }
+        }
 
         /* ── İSTATİSTİKLER ────────────────────────────────── */
         .stat-overview { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px,1fr)); gap: 14px; margin-bottom: 60px; }
@@ -1044,6 +1110,40 @@
     </div>
 </section>
 
+<!-- ══════════════ PLAYER DETAIL MODAL ══════════════ -->
+<div class="player-overlay" id="playerOverlay" onclick="closePlayer(event)">
+    <div class="player-modal" id="playerModal">
+        <button class="pm-close" onclick="closePlayerModal()"><i class="fas fa-times"></i></button>
+        <div class="pm-inner">
+            <div class="pm-photo-col">
+                <img class="pm-photo" id="pm-photo" src="" alt="">
+                <div class="pm-no" id="pm-no"></div>
+                <div class="pm-pos-badge" id="pm-pos-badge"></div>
+                <div class="pm-nat-row">
+                    <span class="pm-nat-flag" id="pm-flag"></span>
+                    <span id="pm-country"></span>
+                </div>
+            </div>
+            <div class="pm-info-col">
+                <div class="pm-name" id="pm-name"></div>
+                <div class="pm-posdetail" id="pm-posdetail"></div>
+                <div class="pm-stats-grid">
+                    <div class="pm-stat"><div class="pm-stat-label">Doğum Tarihi</div><div class="pm-stat-val" id="pm-dob"></div></div>
+                    <div class="pm-stat"><div class="pm-stat-label">Yaş</div><div class="pm-stat-val yellow" id="pm-age"></div></div>
+                    <div class="pm-stat"><div class="pm-stat-label">Boy</div><div class="pm-stat-val" id="pm-height"></div></div>
+                    <div class="pm-stat"><div class="pm-stat-label">Tercih Edilen Ayak</div><div class="pm-stat-val" id="pm-foot"></div></div>
+                    <div class="pm-stat"><div class="pm-stat-label">Sözleşme Bitiş</div><div class="pm-stat-val" id="pm-contract"></div></div>
+                    <div class="pm-stat"><div class="pm-stat-label">Önceki Kulüp</div><div class="pm-stat-val" id="pm-prev"></div></div>
+                    <div class="pm-stat" style="grid-column:1/-1"><div class="pm-stat-label">Piyasa Değeri</div><div class="pm-stat-val yellow" id="pm-value"></div></div>
+                </div>
+                <a class="pm-tm-btn" id="pm-tm-link" href="#" target="_blank" rel="noopener">
+                    <i class="fas fa-external-link-alt"></i> Transfermarkt Profili
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- ══════════════ FOOTER ══════════════ -->
 <footer>
     <div class="footer-inner">
@@ -1404,8 +1504,8 @@ function tmUrlBig(id) {
 
 function renderPlayers(filter) {
     const list = filter === 'all' ? SQUAD : SQUAD.filter(p => p.pos === filter);
-    document.getElementById('playersGrid').innerHTML = list.map((p, i) => {
-        const realIdx = filter === 'all' ? i : SQUAD.indexOf(p);
+    document.getElementById('playersGrid').innerHTML = list.map(p => {
+        const realIdx = SQUAD.indexOf(p);
         return `
         <div class="player-card" onclick="openPlayer(${realIdx})">
             <div class="pc-photo-wrap">
@@ -1418,10 +1518,43 @@ function renderPlayers(filter) {
             </div>
             <div class="pc-body">
                 <div class="pc-name">${p.name}</div>
-                <span class="pos-tag" style="background:${POS_COLOR[p.pos]}">${p.posDetail}</span>
+                <div class="pc-pos">${p.posDetail}</div>
             </div>
         </div>`;
     }).join('');
+}
+
+function openPlayer(idx) {
+    const p = SQUAD[idx];
+    if (!p) return;
+    document.getElementById('pm-photo').src = tmUrlBig(p.tmId);
+    document.getElementById('pm-photo').onerror = function(){ this.src = avatarUrl(p.name); };
+    document.getElementById('pm-no').textContent = '#' + p.no;
+    document.getElementById('pm-name').textContent = p.name;
+    document.getElementById('pm-posdetail').textContent = p.posDetail;
+    document.getElementById('pm-pos-badge').textContent = POS_LABEL[p.pos];
+    document.getElementById('pm-pos-badge').style.background = POS_COLOR[p.pos];
+    document.getElementById('pm-flag').textContent = p.nat;
+    document.getElementById('pm-country').textContent = p.country;
+    document.getElementById('pm-dob').textContent = p.dob;
+    document.getElementById('pm-age').textContent = p.age + ' yaş';
+    document.getElementById('pm-height').textContent = p.height;
+    document.getElementById('pm-foot').textContent = p.foot + ' ayak';
+    document.getElementById('pm-contract').textContent = p.contract;
+    document.getElementById('pm-prev').textContent = p.prevClub;
+    document.getElementById('pm-value').textContent = p.value;
+    document.getElementById('pm-tm-link').href = 'https://www.transfermarkt.com.tr/x/profil/spieler/' + p.tmId;
+    document.getElementById('playerOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closePlayerModal() {
+    document.getElementById('playerOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+function closePlayer(e) {
+    if (e.target === document.getElementById('playerOverlay')) closePlayerModal();
 }
 
 function filterBy(pos, btn) {
@@ -1534,6 +1667,7 @@ window.overlayClick=overlayClick; window.switchForm=switchForm;
 window.openChangePw=openChangePw; window.openChangeName=openChangeName;
 window.toggleDrop=toggleDrop; window.closeDrop=closeDrop;
 window.toggleEye=toggleEye; window.toast=toast;
+window.openPlayer=openPlayer; window.closePlayerModal=closePlayerModal; window.closePlayer=closePlayer;
 </script>
 </body>
 </html>
