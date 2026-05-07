@@ -1565,20 +1565,22 @@ const auth = getAuth(app);
 const db   = getDatabase(app);
 const gProv = new GoogleAuthProvider();
 const ADMIN_EMAIL = 'mehmetcinartursak497@gmail.com';
+let maintenanceOn = false;
 
-/* Bakım arası kontrolü – sayfa açılışında çalışır */
-onValue(ref(db, 'maintenance/active'), snap => {
-    const on = snap.val() === true;
+function updateMaintenanceUI() {
     const user = auth.currentUser;
-    if (on && (!user || user.email !== ADMIN_EMAIL)) {
-        document.getElementById('maintOverlay').classList.remove('hidden');
-    } else {
-        document.getElementById('maintOverlay').classList.add('hidden');
-    }
+    const isAdmin = user && user.email === ADMIN_EMAIL;
+    document.getElementById('maintOverlay').classList.toggle('hidden', !maintenanceOn || isAdmin);
     const btn = document.getElementById('maintBtn');
-    if (btn) btn.innerHTML = on
+    if (btn) btn.innerHTML = maintenanceOn
         ? '<i class="fas fa-tools"></i>Bakım Arası Bitir'
         : '<i class="fas fa-tools"></i>Bakım Arası Başlat';
+}
+
+/* Gerçek zamanlı bakım durumu dinleyicisi */
+onValue(ref(db, 'maintenance/active'), snap => {
+    maintenanceOn = snap.val() === true;
+    updateMaintenanceUI();
 });
 
 const errMsgs = {
@@ -1614,15 +1616,13 @@ onAuthStateChanged(auth, user => {
         /* Admin menüsü */
         const adminEl = document.getElementById('adminItems');
         if (adminEl) adminEl.classList.toggle('hidden', user.email !== ADMIN_EMAIL);
-        /* Bakım arası – admin giriş yaparsa overlay kaldır */
-        if (user.email === ADMIN_EMAIL) {
-            document.getElementById('maintOverlay').classList.add('hidden');
-        }
+        updateMaintenanceUI();
     } else {
         document.getElementById('loginBtn').classList.remove('hidden');
         document.getElementById('userInfo').classList.add('hidden');
         const adminEl = document.getElementById('adminItems');
         if (adminEl) adminEl.classList.add('hidden');
+        updateMaintenanceUI();
     }
 });
 
@@ -1968,9 +1968,10 @@ function closeFeedbacks() { document.getElementById('fbOverlay').classList.add('
 /* ── Admin: Bakım Arası ────────────────────────────────────────────────── */
 async function toggleMaintenance() {
     closeDrop();
-    const snap = await get(ref(db, 'maintenance/active'));
-    const current = snap.val() === true;
-    await set(ref(db, 'maintenance/active'), !current);
+    const newState = !maintenanceOn;
+    maintenanceOn = newState;
+    updateMaintenanceUI();
+    await set(ref(db, 'maintenance/active'), newState);
 }
 
 window.showTab=showTab; window.filterBy=filterBy; window.sendContact=sendContact;
