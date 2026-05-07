@@ -292,6 +292,22 @@
         .tl-body h4 { font-size: 15px; font-weight: 700; color: var(--yellow); margin-bottom: 6px; }
         .tl-body p { font-size: 13.5px; color: rgba(255,255,255,0.65); line-height: 1.65; }
 
+        /* Başarılar / Kupalar */
+        .trophy-section { margin-bottom: 60px; }
+        .trophy-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px,1fr)); gap: 18px; }
+        .trophy-card {
+            background: var(--card-bg); border: 1px solid var(--card-border);
+            border-radius: var(--radius); padding: 22px; transition: var(--transition);
+        }
+        .trophy-card:hover { transform: translateY(-3px); border-color: rgba(255,237,0,0.35); box-shadow: 0 10px 28px rgba(0,0,0,0.3); }
+        .trophy-card.featured { border-color: rgba(255,237,0,0.28); background: linear-gradient(145deg,rgba(0,45,114,0.6) 0%,rgba(0,18,53,0.85) 100%); }
+        .tc-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+        .tc-icon { font-size: 26px; flex-shrink: 0; }
+        .tc-title { font-size: 14.5px; font-weight: 700; color: #fff; flex: 1; }
+        .tc-count { background: var(--yellow); color: #000; font-weight: 900; font-size: 13px; padding: 2px 10px; border-radius: 20px; flex-shrink: 0; }
+        .tc-years { line-height: 1.7; }
+        .tc-year-tag { display: inline-block; background: rgba(255,237,0,0.07); border: 1px solid rgba(255,237,0,0.14); color: rgba(255,255,255,0.72); border-radius: 4px; padding: 2px 7px; margin: 2px 3px 2px 0; font-size: 11px; }
+
         /* Stadium */
         .stadium-wrap { margin-bottom: 60px; }
         .stadium-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
@@ -925,6 +941,183 @@
                 </div>
             </div>
         </div>
+
+        <!-- ── BAŞARILAR ── -->
+        <div class="trophy-section">
+            <h3 class="sub-title">Başarılar &amp; Kupalar</h3>
+            <div class="trophy-grid">
+
+                <!-- Süper Lig -->
+                <div class="trophy-card featured">
+                    <div class="tc-header">
+                        <span class="tc-icon">🏆</span>
+                        <span class="tc-title">Süper Lig</span>
+                        <span class="tc-count">19</span>
+                    </div>
+                    <div class="tc-years">
+                        <span class="tc-year-tag">1959</span><span class="tc-year-tag">1960-61</span><span class="tc-year-tag">1963-64</span><span class="tc-year-tag">1964-65</span><span class="tc-year-tag">1967-68</span><span class="tc-year-tag">1969-70</span><span class="tc-year-tag">1973-74</span><span class="tc-year-tag">1974-75</span><span class="tc-year-tag">1977-78</span><span class="tc-year-tag">1982-83</span><span class="tc-year-tag">1984-85</span><span class="tc-year-tag">1988-89</span><span class="tc-year-tag">1995-96</span><span class="tc-year-tag">2000-01</span><span class="tc-year-tag">2003-04</span><span class="tc-year-tag">2004-05</span><span class="tc-year-tag">2006-07</span><span class="tc-year-tag">2010-11</span><span class="tc-year-tag">2013-14</span>
+                    </div>
+                </div>
+
+                <!-- Milli Küme -->
+                <div class="trophy-card featured">
+                    <div class="tc-header">
+                        <span class="tc-icon">🏅</span>
+                        <span class="tc-title">Milli Küme</span>
+                        <span class="tc-count">6</span>
+                    </div>
+                    <div class="tc-years">
+                        <span class="tc-year-tag">1936-37</span><span class="tc-year-tag">1939-40</span><span class="tc-year-tag">1942-43</span><span class="tc-year-tag">1944-45</span><span class="tc-year-tag">1945-46</span><span class="tc-year-tag">1949-50</span>
+                    </div>
+                </div>
+
+                <!-- Türkiye Futbol Şampiyonası -->
+                <div class="trophy-card featured">
+                    <div class="tc-header">
+                        <span class="tc-icon">⚽</span>
+                        <span class="tc-title">Türkiye Futbol Şampiyonası</span>
+                        <span class="tc-count">3</span>
+                    </div>
+                    <div class="tc-years">
+                        <span class="tc-year-tag">1932-33</span><span class="tc-year-tag">1934-35</span><span class="tc-year-tag">1943-44</span>
+                    </div>
+                </div>
+
+                <!-- Türkiye Kupası -->
+                <div class="trophy-card">
+                    <div class="tc-header">
+                        <span class="tc-icon">🥇</span>
+                        <span class="tc-title">Türkiye Kupası</span>
+                        <span class="tc-count">7</span>
+                    </div>
+                    <div class="tc-years">
+                        <span class="tc-year-tag">1967-68</span><span class="tc-year-tag">1973-74</span><span class="tc-year-tag">1978-79</span><span class="tc-year-tag">1982-83</span><span class="tc-year-tag">2011-12</span><span class="tc-year-tag">2012-13</span><span class="tc-year-tag">2022-23</span>
+                    </div>
+                </div>
+
+                <!-- Türkiye Süper Kupası -->
+                <div class="trophy-card">
+                    <div class="tc-header">
+                        <span class="tc-icon">🌟</span>
+                        <span class="tc-title">Türkiye Süper Kupası</span>
+                        <span class="tc-count">10</span>
+                    </div>
+                    <div class="tc-years">
+                        <span class="tc-year-tag">1968</span><span class="tc-year-tag">1973</span><span class="tc-year-tag">1975</span><span class="tc-year-tag">1984</span><span class="tc-year-tag">1985</span><span class="tc-year-tag">1990</span><span class="tc-year-tag">2007</span><span class="tc-year-tag">2009</span><span class="tc-year-tag">2014</span><span class="tc-year-tag">2025</span>
+                    </div>
+                </div>
+
+                <!-- Balkan Kupası -->
+                <div class="trophy-card">
+                    <div class="tc-header">
+                        <span class="tc-icon">🌍</span>
+                        <span class="tc-title">Balkan Kupası</span>
+                        <span class="tc-count">1</span>
+                    </div>
+                    <div class="tc-years">
+                        <span class="tc-year-tag">1968</span>
+                    </div>
+                </div>
+
+                <!-- Başbakanlık Kupası -->
+                <div class="trophy-card">
+                    <div class="tc-header">
+                        <span class="tc-icon">🎖️</span>
+                        <span class="tc-title">Başbakanlık Kupası</span>
+                        <span class="tc-count">8</span>
+                    </div>
+                    <div class="tc-years">
+                        <span class="tc-year-tag">1945</span><span class="tc-year-tag">1946</span><span class="tc-year-tag">1950</span><span class="tc-year-tag">1973</span><span class="tc-year-tag">1980</span><span class="tc-year-tag">1989</span><span class="tc-year-tag">1993</span><span class="tc-year-tag">1998</span>
+                    </div>
+                </div>
+
+                <!-- Atatürk Kupası -->
+                <div class="trophy-card">
+                    <div class="tc-header">
+                        <span class="tc-icon">🏵️</span>
+                        <span class="tc-title">Atatürk Kupası</span>
+                        <span class="tc-count">2</span>
+                    </div>
+                    <div class="tc-years">
+                        <span class="tc-year-tag">1964</span><span class="tc-year-tag">1998</span>
+                    </div>
+                </div>
+
+                <!-- İstanbul Ligi -->
+                <div class="trophy-card">
+                    <div class="tc-header">
+                        <span class="tc-icon">🌙</span>
+                        <span class="tc-title">İstanbul Ligi</span>
+                        <span class="tc-count">16</span>
+                    </div>
+                    <div class="tc-years">
+                        <span class="tc-year-tag">1911-12</span><span class="tc-year-tag">1913-14</span><span class="tc-year-tag">1914-15</span><span class="tc-year-tag">1920-21</span><span class="tc-year-tag">1922-23</span><span class="tc-year-tag">1929-30</span><span class="tc-year-tag">1932-33</span><span class="tc-year-tag">1934-35</span><span class="tc-year-tag">1935-36</span><span class="tc-year-tag">1936-37</span><span class="tc-year-tag">1943-44</span><span class="tc-year-tag">1946-47</span><span class="tc-year-tag">1947-48</span><span class="tc-year-tag">1952-53</span><span class="tc-year-tag">1956-57</span><span class="tc-year-tag">1958-59</span>
+                    </div>
+                </div>
+
+                <!-- İstanbul Şildi -->
+                <div class="trophy-card">
+                    <div class="tc-header">
+                        <span class="tc-icon">🛡️</span>
+                        <span class="tc-title">İstanbul Şildi</span>
+                        <span class="tc-count">4</span>
+                    </div>
+                    <div class="tc-years">
+                        <span class="tc-year-tag">1930</span><span class="tc-year-tag">1934</span><span class="tc-year-tag">1938</span><span class="tc-year-tag">1939</span>
+                    </div>
+                </div>
+
+                <!-- İstanbul Kupası -->
+                <div class="trophy-card">
+                    <div class="tc-header">
+                        <span class="tc-icon">🏙️</span>
+                        <span class="tc-title">İstanbul Kupası</span>
+                        <span class="tc-count">1</span>
+                    </div>
+                    <div class="tc-years">
+                        <span class="tc-year-tag">1945</span>
+                    </div>
+                </div>
+
+                <!-- General Harrington Kupası -->
+                <div class="trophy-card">
+                    <div class="tc-header">
+                        <span class="tc-icon">⭐</span>
+                        <span class="tc-title">General Harrington Kupası</span>
+                        <span class="tc-count">1</span>
+                    </div>
+                    <div class="tc-years">
+                        <span class="tc-year-tag">29 Haziran 1923</span>
+                    </div>
+                </div>
+
+                <!-- Donanma Kupası -->
+                <div class="trophy-card">
+                    <div class="tc-header">
+                        <span class="tc-icon">⚓</span>
+                        <span class="tc-title">Donanma Kupası</span>
+                        <span class="tc-count">4</span>
+                    </div>
+                    <div class="tc-years">
+                        <span class="tc-year-tag">1982</span><span class="tc-year-tag">1983</span><span class="tc-year-tag">1984</span><span class="tc-year-tag">1985</span>
+                    </div>
+                </div>
+
+                <!-- TSYD Kupası -->
+                <div class="trophy-card">
+                    <div class="tc-header">
+                        <span class="tc-icon">📰</span>
+                        <span class="tc-title">TSYD Kupası</span>
+                        <span class="tc-count">12</span>
+                    </div>
+                    <div class="tc-years">
+                        <span class="tc-year-tag">1969</span><span class="tc-year-tag">1973</span><span class="tc-year-tag">1975</span><span class="tc-year-tag">1976</span><span class="tc-year-tag">1978</span><span class="tc-year-tag">1979</span><span class="tc-year-tag">1980</span><span class="tc-year-tag">1982</span><span class="tc-year-tag">1985</span><span class="tc-year-tag">1986</span><span class="tc-year-tag">1994</span><span class="tc-year-tag">1995</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </section>
 
     <!-- ── FUTBOLCULAR ── -->
