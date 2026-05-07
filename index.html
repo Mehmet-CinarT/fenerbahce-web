@@ -668,6 +668,7 @@
                         <i class="fas fa-chevron-down" style="font-size:10px"></i>
                     </button>
                     <div class="dropdown-menu" id="dropMenu">
+                        <a href="#" onclick="openChangeName()"><i class="fas fa-user-edit"></i>İsim Değiştir</a>
                         <a href="#" onclick="openChangePw()"><i class="fas fa-key"></i>Şifre Değiştir</a>
                         <a href="#" onclick="doSignOut()"><i class="fas fa-sign-out-alt"></i>Çıkış Yap</a>
                     </div>
@@ -1136,6 +1137,16 @@
             <div class="m-links"><a href="#" onclick="switchForm('f-login')">← Giriş sayfasına dön</a></div>
         </div>
 
+        <!-- İsim Değiştir -->
+        <div class="m-form" id="f-changename">
+            <div class="m-head"><div class="m-icon">✏️</div><h2>İsim Değiştir</h2><p>Profilinizdeki görünen adı güncelleyin</p></div>
+            <div class="fg"><label>Yeni Ad Soyad</label><input type="text" id="cn-name" placeholder="Adınız Soyadınız"></div>
+            <div class="err-msg" id="cn-err"></div>
+            <div class="ok-msg"  id="cn-ok"></div>
+            <button class="btn-sub" onclick="doChangeName()">İsmi Güncelle</button>
+            <div class="m-links"><a href="#" onclick="closeModal()">İptal</a></div>
+        </div>
+
         <!-- Şifre Değiştir -->
         <div class="m-form" id="f-changepw">
             <div class="m-head"><div class="m-icon">🔒</div><h2>Şifre Değiştir</h2><p>Güvenliğiniz için mevcut şifrenizi doğrulayın</p></div>
@@ -1320,6 +1331,23 @@ window.doChangePw = async () => {
         ['cp-cur','cp-new','cp-new2'].forEach(id => document.getElementById(id).value = '');
     } catch (e) { showErr('cp-err', errTr(e.code)); }
 };
+
+/* Change display name */
+window.doChangeName = async () => {
+    const name = document.getElementById('cn-name').value.trim();
+    hideErr('cn-err'); document.getElementById('cn-ok').classList.remove('show');
+    if (!name) return showErr('cn-err', 'Lütfen bir isim girin.');
+    if (name.length < 2) return showErr('cn-err', 'İsim en az 2 karakter olmalıdır.');
+    const user = auth.currentUser;
+    if (!user) return;
+    try {
+        await updateProfile(user, { displayName: name });
+        document.getElementById('userName').textContent = name;
+        showOk('cn-ok', 'İsminiz başarıyla güncellendi! ✓');
+        document.getElementById('cn-name').value = '';
+        setTimeout(() => closeModal(), 1500);
+    } catch (e) { showErr('cn-err', errTr(e.code)); }
+};
 </script>
 
 <!-- ══════════════ APP JS ══════════════ -->
@@ -1449,6 +1477,10 @@ function openChangePw() {
     closeDrop(); openModal(); switchForm('f-changepw');
 }
 
+function openChangeName() {
+    closeDrop(); openModal(); switchForm('f-changename');
+}
+
 /* ── Dropdown ─────────────────────────────────────────────────────────── */
 function toggleDrop() { document.getElementById('dropMenu').classList.toggle('open'); }
 function closeDrop()  { document.getElementById('dropMenu').classList.remove('open'); }
@@ -1499,9 +1531,9 @@ function sendContact(e) {
 window.showTab=showTab; window.filterBy=filterBy; window.sendContact=sendContact;
 window.openModal=openModal; window.closeModal=closeModal;
 window.overlayClick=overlayClick; window.switchForm=switchForm;
-window.openChangePw=openChangePw; window.toggleDrop=toggleDrop;
-window.closeDrop=closeDrop; window.toggleEye=toggleEye;
-window.toast=toast;
+window.openChangePw=openChangePw; window.openChangeName=openChangeName;
+window.toggleDrop=toggleDrop; window.closeDrop=closeDrop;
+window.toggleEye=toggleEye; window.toast=toast;
 </script>
 </body>
 </html>
