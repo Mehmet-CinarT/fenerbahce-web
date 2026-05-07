@@ -99,6 +99,51 @@
         }
         .dropdown-menu a:hover { background: rgba(255,237,0,0.08); color: var(--yellow); }
         .dropdown-menu a i { width: 16px; color: var(--yellow); }
+        .drop-divider { height: 1px; background: rgba(255,237,0,0.15); margin: 4px 0; }
+        .admin-items a { color: rgba(255,200,0,0.9) !important; }
+
+        /* Maintenance overlay */
+        .maint-overlay {
+            position: fixed; inset: 0; background: #000d26; z-index: 99999;
+            display: flex; align-items: center; justify-content: center;
+            flex-direction: column; text-align: center; padding: 24px;
+        }
+        .maint-overlay.hidden { display: none; }
+        .maint-logo { width: 100px; height: 100px; object-fit: contain; margin-bottom: 28px; filter: drop-shadow(0 4px 16px rgba(255,237,0,0.3)); }
+        .maint-title { font-size: 36px; font-weight: 900; color: var(--yellow); margin-bottom: 12px; }
+        .maint-sub { font-size: 16px; color: rgba(255,255,255,0.6); max-width: 420px; line-height: 1.7; }
+        .maint-icon { font-size: 56px; margin-bottom: 20px; }
+
+        /* Feedback modal */
+        .fb-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 9000;
+            display: flex; align-items: center; justify-content: center; padding: 20px;
+        }
+        .fb-overlay.hidden { display: none; }
+        .fb-modal {
+            background: #001540; border: 1px solid rgba(255,237,0,0.2);
+            border-radius: 16px; width: 100%; max-width: 680px;
+            max-height: 80vh; display: flex; flex-direction: column; overflow: hidden;
+        }
+        .fb-head {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 20px 24px; border-bottom: 1px solid rgba(255,237,0,0.12);
+        }
+        .fb-head h2 { font-size: 18px; font-weight: 800; color: var(--yellow); }
+        .fb-close { background: none; border: none; color: rgba(255,255,255,0.5); font-size: 20px; cursor: pointer; }
+        .fb-close:hover { color: #fff; }
+        .fb-body { overflow-y: auto; padding: 16px 24px; flex: 1; }
+        .fb-item {
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,237,0,0.1);
+            border-radius: 10px; padding: 14px 16px; margin-bottom: 12px;
+        }
+        .fb-item-head { display: flex; gap: 12px; align-items: center; margin-bottom: 6px; flex-wrap: wrap; }
+        .fb-name { font-weight: 700; font-size: 14px; color: #fff; }
+        .fb-email { font-size: 12px; color: rgba(255,255,255,0.45); }
+        .fb-subject { margin-left: auto; font-size: 11px; background: rgba(255,237,0,0.12); color: var(--yellow); padding: 2px 8px; border-radius: 10px; }
+        .fb-msg { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.6; }
+        .fb-date { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 6px; }
+        .fb-empty { text-align: center; color: rgba(255,255,255,0.4); padding: 40px 0; font-size: 14px; }
 
         .btn-login {
             background: var(--yellow); color: var(--navy-dark);
@@ -784,6 +829,11 @@
                         <a href="#" onclick="openChangeName()"><i class="fas fa-user-edit"></i>İsim Değiştir</a>
                         <a href="#" onclick="openChangePw()"><i class="fas fa-key"></i>Şifre Değiştir</a>
                         <a href="#" onclick="doSignOut()"><i class="fas fa-sign-out-alt"></i>Çıkış Yap</a>
+                        <div id="adminItems" class="admin-items hidden">
+                            <div class="drop-divider"></div>
+                            <a href="#" onclick="openFeedbacks()"><i class="fas fa-comments"></i>Geri Bildirimler</a>
+                            <a href="#" onclick="toggleMaintenance()" id="maintBtn"><i class="fas fa-tools"></i>Bakım Arası Başlat</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1487,6 +1537,7 @@
 -->
 <script type="module">
 import { initializeApp }                  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getDatabase, ref, push, get, set, onValue } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
 import { getAuth, onAuthStateChanged,
          signInWithEmailAndPassword,
          createUserWithEmailAndPassword,
@@ -1511,7 +1562,24 @@ const firebaseConfig = {
 
 const app  = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db   = getDatabase(app);
 const gProv = new GoogleAuthProvider();
+const ADMIN_EMAIL = 'mehmetcinartursak497@gmail.com';
+
+/* Bakım arası kontrolü – sayfa açılışında çalışır */
+onValue(ref(db, 'maintenance/active'), snap => {
+    const on = snap.val() === true;
+    const user = auth.currentUser;
+    if (on && (!user || user.email !== ADMIN_EMAIL)) {
+        document.getElementById('maintOverlay').classList.remove('hidden');
+    } else {
+        document.getElementById('maintOverlay').classList.add('hidden');
+    }
+    const btn = document.getElementById('maintBtn');
+    if (btn) btn.innerHTML = on
+        ? '<i class="fas fa-tools"></i>Bakım Arası Bitir'
+        : '<i class="fas fa-tools"></i>Bakım Arası Başlat';
+});
 
 const errMsgs = {
     'auth/user-not-found':       'Bu e-posta ile kayıtlı kullanıcı bulunamadı.',
@@ -1543,9 +1611,18 @@ onAuthStateChanged(auth, user => {
         document.getElementById('userInfo').classList.remove('hidden');
         document.getElementById('userName').textContent = user.displayName || user.email.split('@')[0];
         closeModal();
+        /* Admin menüsü */
+        const adminEl = document.getElementById('adminItems');
+        if (adminEl) adminEl.classList.toggle('hidden', user.email !== ADMIN_EMAIL);
+        /* Bakım arası – admin giriş yaparsa overlay kaldır */
+        if (user.email === ADMIN_EMAIL) {
+            document.getElementById('maintOverlay').classList.add('hidden');
+        }
     } else {
         document.getElementById('loginBtn').classList.remove('hidden');
         document.getElementById('userInfo').classList.add('hidden');
+        const adminEl = document.getElementById('adminItems');
+        if (adminEl) adminEl.classList.add('hidden');
     }
 });
 
@@ -1844,15 +1921,18 @@ renderPlayers('all');
 
 /* expose globals */
 /* ── Contact form ─────────────────────────────────────────────────────── */
-function sendContact(e) {
+async function sendContact(e) {
     e.preventDefault();
     const name    = document.getElementById('cf-name').value.trim();
     const email   = document.getElementById('cf-email').value.trim();
-    const subject = document.getElementById('cf-subject').value;
+    const subject = document.getElementById('cf-subject').value || 'Belirtilmedi';
     const msg     = document.getElementById('cf-msg').value.trim();
     if (!name || !email || !msg) return;
 
-    /* Firebase entegrasyonu varsa buraya Firestore yazma eklenebilir */
+    await push(ref(db, 'feedback'), {
+        name, email, subject, msg,
+        date: new Date().toLocaleString('tr-TR')
+    });
 
     document.getElementById('cf-success').classList.remove('hidden');
     document.getElementById('cf-name').value    = '';
@@ -1862,6 +1942,37 @@ function sendContact(e) {
     setTimeout(() => document.getElementById('cf-success').classList.add('hidden'), 5000);
 }
 
+/* ── Admin: Geri Bildirimler ───────────────────────────────────────────── */
+function openFeedbacks() {
+    closeDrop();
+    document.getElementById('fbOverlay').classList.remove('hidden');
+    get(ref(db, 'feedback')).then(snap => {
+        const list = document.getElementById('fbList');
+        if (!snap.exists()) { list.innerHTML = '<div class="fb-empty">Henüz geri bildirim yok.</div>'; return; }
+        const items = [];
+        snap.forEach(child => items.unshift({ id: child.key, ...child.val() }));
+        list.innerHTML = items.map(f => `
+            <div class="fb-item">
+                <div class="fb-item-head">
+                    <span class="fb-name">${f.name}</span>
+                    <span class="fb-email">${f.email}</span>
+                    <span class="fb-subject">${f.subject}</span>
+                </div>
+                <div class="fb-msg">${f.msg.replace(/\n/g,'<br>')}</div>
+                <div class="fb-date">${f.date}</div>
+            </div>`).join('');
+    });
+}
+function closeFeedbacks() { document.getElementById('fbOverlay').classList.add('hidden'); }
+
+/* ── Admin: Bakım Arası ────────────────────────────────────────────────── */
+async function toggleMaintenance() {
+    closeDrop();
+    const snap = await get(ref(db, 'maintenance/active'));
+    const current = snap.val() === true;
+    await set(ref(db, 'maintenance/active'), !current);
+}
+
 window.showTab=showTab; window.filterBy=filterBy; window.sendContact=sendContact;
 window.openModal=openModal; window.closeModal=closeModal;
 window.overlayClick=overlayClick; window.switchForm=switchForm;
@@ -1869,6 +1980,29 @@ window.openChangePw=openChangePw; window.openChangeName=openChangeName;
 window.toggleDrop=toggleDrop; window.closeDrop=closeDrop;
 window.toggleEye=toggleEye; window.toast=toast;
 window.openPlayer=openPlayer; window.closePlayerModal=closePlayerModal; window.closePlayer=closePlayer;
+window.openFeedbacks=openFeedbacks; window.closeFeedbacks=closeFeedbacks; window.toggleMaintenance=toggleMaintenance;
 </script>
+
+<!-- ── BAKIM ARASI ── -->
+<div class="maint-overlay hidden" id="maintOverlay">
+    <span class="maint-icon">🔧</span>
+    <img src="Fenerbah%C3%A7e.png" alt="Fenerbahçe" class="maint-logo">
+    <div class="maint-title">Bakım Arası</div>
+    <p class="maint-sub">Sitemiz şu anda bakım çalışmaları nedeniyle geçici olarak hizmet dışıdır. En kısa sürede geri döneceğiz.</p>
+</div>
+
+<!-- ── GERİ BİLDİRİMLER MODAL ── -->
+<div class="fb-overlay hidden" id="fbOverlay" onclick="if(event.target===this)closeFeedbacks()">
+    <div class="fb-modal">
+        <div class="fb-head">
+            <h2><i class="fas fa-comments" style="margin-right:8px"></i>Geri Bildirimler</h2>
+            <button class="fb-close" onclick="closeFeedbacks()">✕</button>
+        </div>
+        <div class="fb-body" id="fbList">
+            <div class="fb-empty">Yükleniyor…</div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
